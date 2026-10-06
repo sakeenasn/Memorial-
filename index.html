@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Visite en réalité virtuelle — Mémorial des femmes en résistance</title>
+<link rel="stylesheet" href="styles.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/aframe/1.5.0/aframe.min.js"></script>
+</head>
+<body>
+<a href="#main" class="skip-link">Aller au contenu</a>
+
+<header class="site-header">
+  <div class="nav-wrap">
+    <a href="index.html" class="site-title">
+      <span class="small">FORT DE ROMAINVILLE · OUVERTURE 2028</span>
+      Mémorial des femmes en résistance
+    </a>
+    <ul class="nav-links">
+      <li><a href="index.html">Histoire du lieu</a></li>
+      <li><a href="histoires.html">Portraits</a></li>
+      <li><a href="jeux.html">Parcours ludiques</a></li>
+      <li><a href="vr.html" aria-current="page">Visite en réalité virtuelle</a></li>
+    </ul>
+  </div>
+</header>
+
+<main id="main">
+
+  <section style="padding-top:3em;">
+    <h1 style="font-size:2rem; max-width:34ch;">Trois points du fort, en vue à 360°</h1>
+    <p style="color:var(--ink-muted); max-width:60ch; margin-top:1em;">
+      Prototype construit avec A-Frame. Les trois environnements ci-dessous sont des <strong>placeholders de couleur et de texte</strong> ; la version finale utiliserait de vraies prises de vue à 360° du fort, avec des points d'intérêt cliquables ancrés dans l'image réelle.
+    </p>
+  </section>
+
+  <section aria-labelledby="vr-title">
+    <div class="section-head">
+      <h2 id="vr-title" style="font-size:1.3rem;">Parcours</h2>
+    </div>
+
+    <div class="vr-stops" role="group" aria-label="Choisir un point de la visite">
+      <button class="vr-stop" data-stop="cour" aria-pressed="true">1 — La cour d'honneur</button>
+      <button class="vr-stop" data-stop="casemate" aria-pressed="false">2 — Une casemate</button>
+      <button class="vr-stop" data-stop="mur" aria-pressed="false">3 — Le mur du souvenir</button>
+    </div>
+
+    <div class="vr-stage" style="margin-top:1em; height:60vh; min-height:360px;">
+      <a-scene embedded vr-mode-ui="enabled: true" style="width:100%; height:100%;">
+        <a-sky id="vr-sky" color="#2b2f22"></a-sky>
+        <a-entity id="vr-text" position="0 1.6 -3">
+          <a-text value="La cour d'honneur" align="center" color="#ece7d9" width="6"></a-text>
+        </a-entity>
+        <a-camera position="0 1.6 0" look-controls wasd-controls></a-camera>
+      </a-scene>
+    </div>
+
+    <p class="vr-caption" id="vr-caption">
+      <strong>La cour d'honneur</strong>
+      Lieu de rassemblement des internées, visible depuis les fenêtres des casemates. C'est ici que se déroulaient les appels.
+    </p>
+  </section>
+
+</main>
+
+<footer>
+  <span>Prototype non officiel — projet d'étude, sans lien avec le Musée de la Résistance nationale.</span>
+  <span>Fort de Romainville, Les Lilas (93)</span>
+</footer>
+
+<script>
+  const stops = {
+    cour: {
+      color: '#2b2f22',
+      label: "La cour d'honneur",
+      caption: "Lieu de rassemblement des internées, visible depuis les fenêtres des casemates. C'est ici que se déroulaient les appels."
+    },
+    casemate: {
+      color: '#1c1a16',
+      label: "Une casemate",
+      caption: "Les casemates voûtées servaient de dortoirs collectifs, dans des conditions d'hygiène et de surpopulation très dures."
+    },
+    mur: {
+      color: '#241414',
+      label: "Le mur du souvenir",
+      caption: "Emplacement imaginé pour le futur mur portant les noms des femmes passées par Romainville avant leur déportation."
+    }
+  };
+
+  document.querySelectorAll('.vr-stop').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.vr-stop').forEach(b => b.setAttribute('aria-pressed','false'));
+      btn.setAttribute('aria-pressed','true');
+      const data = stops[btn.dataset.stop];
+      document.getElementById('vr-sky').setAttribute('color', data.color);
+      document.getElementById('vr-text').innerHTML = `<a-text value="${data.label}" align="center" color="#ece7d9" width="6"></a-text>`;
+      document.getElementById('vr-caption').innerHTML = `<strong>${data.label}</strong>${data.caption}`;
+    });
+  });
+</script>
+</body>
+</html>
