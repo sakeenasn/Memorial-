@@ -8,7 +8,7 @@
 
   <meta
     name="description"
-    content="Explorez un espace numérique de mémoire consacré aux femmes dans la Résistance et la déportation."
+    content="Explorez un mémorial numérique consacré aux femmes dans la Résistance et la déportation."
   >
 
   <style>
@@ -65,16 +65,15 @@
       align-items: center;
       gap: 20px;
       padding: 25px 5%;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
       background: linear-gradient(
         to bottom,
-        rgba(0, 0, 0, 0.65),
+        rgba(0, 0, 0, 0.8),
         transparent
       );
     }
 
     .brand {
-      font-size: 11px;
+      font-size: 10px;
       letter-spacing: 3px;
       text-transform: uppercase;
     }
@@ -92,10 +91,11 @@
 
     .intro {
       position: absolute;
-      top: 19%;
+      top: 20%;
       left: 8%;
-      width: min(440px, 82%);
+      width: min(430px, 82%);
       text-shadow: 0 2px 20px #000;
+      transition: opacity 0.5s ease;
     }
 
     .eyebrow {
@@ -108,9 +108,9 @@
     h1 {
       margin: 18px 0;
       font-family: "Cormorant Garamond", serif;
-      font-size: clamp(42px, 6vw, 76px);
+      font-size: clamp(44px, 6vw, 78px);
       font-weight: 400;
-      line-height: 0.98;
+      line-height: 0.95;
     }
 
     .intro p {
@@ -123,12 +123,11 @@
     .instructions {
       position: absolute;
       left: 5%;
-      bottom: 30px;
+      bottom: 28px;
       max-width: 270px;
       color: #c4c2bb;
       font-size: 10px;
-      line-height: 1.8;
-      letter-spacing: 0.5px;
+      line-height: 1.9;
     }
 
     .instructions strong {
@@ -143,12 +142,12 @@
     .location {
       position: absolute;
       right: 5%;
-      bottom: 30px;
+      bottom: 28px;
       max-width: 250px;
       text-align: right;
       color: #c4c2bb;
       font-size: 10px;
-      line-height: 1.8;
+      line-height: 1.9;
     }
 
     .location strong {
@@ -162,14 +161,13 @@
 
     .hotspot {
       position: fixed;
-      z-index: 4;
+      z-index: 5;
       display: none;
-      max-width: 250px;
-      padding: 16px 18px;
-      border: 1px solid rgba(199, 173, 123, 0.6);
-      background: rgba(8, 9, 9, 0.94);
-      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.35);
-      pointer-events: auto;
+      width: min(280px, 85vw);
+      padding: 20px;
+      border: 1px solid rgba(199, 173, 123, 0.7);
+      background: rgba(8, 9, 9, 0.96);
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
     }
 
     .hotspot.visible {
@@ -177,28 +175,28 @@
     }
 
     .hotspot h2 {
-      margin: 0 0 8px;
+      margin: 0 0 10px;
       color: var(--gold);
       font-family: "Cormorant Garamond", serif;
-      font-size: 25px;
+      font-size: 29px;
       font-weight: 400;
     }
 
     .hotspot p {
       margin: 0;
       color: #e0ded7;
-      font-size: 11px;
+      font-size: 12px;
       line-height: 1.8;
     }
 
     .close-hotspot {
-      margin-top: 12px;
+      margin-top: 16px;
       padding: 0;
       border: 0;
       background: none;
       color: var(--gold);
       font: inherit;
-      font-size: 10px;
+      font-size: 11px;
       cursor: pointer;
     }
 
@@ -224,7 +222,7 @@
     .footer-note {
       position: absolute;
       left: 50%;
-      bottom: 12px;
+      bottom: 10px;
       transform: translateX(-50%);
       color: rgba(255, 255, 255, 0.45);
       font-size: 9px;
@@ -237,8 +235,9 @@
       }
 
       .brand {
-        font-size: 9px;
-        letter-spacing: 2px;
+        max-width: 180px;
+        font-size: 8px;
+        letter-spacing: 1.5px;
       }
 
       .intro {
@@ -252,16 +251,16 @@
       }
 
       .instructions {
-        bottom: 24px;
         left: 6%;
+        bottom: 22px;
         max-width: 190px;
         font-size: 9px;
       }
 
       .location {
         right: 6%;
-        bottom: 24px;
-        max-width: 130px;
+        bottom: 22px;
+        max-width: 125px;
         font-size: 9px;
       }
 
@@ -269,32 +268,41 @@
         display: none;
       }
     }
-
-    @media (prefers-reduced-motion: reduce) {
-      *,
-      *::before,
-      *::after {
-        scroll-behavior: auto !important;
-      }
-    }
   </style>
 </head>
 
 <body>
-  <div class="loading" id="loading">Ouverture du mémorial</div>
 
-  <div id="scene" aria-label="Espace de mémorial en trois dimensions"></div>
+  <div class="loading" id="loading">
+    Ouverture du mémorial
+  </div>
+
+  <div
+    id="scene"
+    aria-label="Espace architectural de mémorial en trois dimensions"
+  ></div>
 
   <div class="interface">
+
     <header class="topbar">
-      <div class="brand">Mémorial numérique · Romainville 2028</div>
-      <a class="back-link" href="index.html">← Retour à l'accueil</a>
+      <div class="brand">
+        Mémorial numérique · Romainville 2028
+      </div>
+
+      <a class="back-link" href="index.html">
+        ← Retour à l'accueil
+      </a>
     </header>
 
     <section class="intro">
-      <div class="eyebrow">Parcours immersif · Prototype</div>
+      <div class="eyebrow">
+        Parcours immersif · Prototype
+      </div>
 
-      <h1>La mémoire<br>en héritage.</h1>
+      <h1>
+        La mémoire<br>
+        en héritage.
+      </h1>
 
       <p>
         Entrez dans un espace de recueillement consacré aux femmes
@@ -304,7 +312,7 @@
     </section>
 
     <div class="instructions">
-      <strong>Comment explorer</strong>
+      <strong>Explorez le mémorial</strong>
       Déplacez la souris pour observer l'espace.<br>
       Cliquez sur les points lumineux pour découvrir les espaces de mémoire.
     </div>
@@ -317,24 +325,34 @@
     <div class="footer-note">
       Prototype numérique — architecture symbolique, non historique
     </div>
+
   </div>
 
   <aside class="hotspot" id="hotspot">
     <h2 id="hotspot-title">Espace de mémoire</h2>
+
     <p id="hotspot-text"></p>
-    <button class="close-hotspot" id="close-hotspot">Fermer ×</button>
+
+    <button class="close-hotspot" id="close-hotspot">
+      Fermer ×
+    </button>
   </aside>
 
   <script type="module">
     import * as THREE from
       "https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.module.js";
 
+    // --------------------------------------------------
+    // 1. INITIALISATION DE LA SCÈNE 3D
+    // --------------------------------------------------
+
     const container = document.getElementById("scene");
     const loading = document.getElementById("loading");
 
     const scene = new THREE.Scene();
+
     scene.background = new THREE.Color(0x080909);
-    scene.fog = new THREE.FogExp2(0x080909, 0.035);
+    scene.fog = new THREE.FogExp2(0x080909, 0.022);
 
     const camera = new THREE.PerspectiveCamera(
       60,
@@ -343,7 +361,9 @@
       100
     );
 
-    camera.position.set(0, 2.2, 10);
+    const initialCameraPosition = new THREE.Vector3(0, 2.2, 10);
+
+    camera.position.copy(initialCameraPosition);
     camera.lookAt(0, 1.5, -5);
 
     const renderer = new THREE.WebGLRenderer({
@@ -351,37 +371,69 @@
       powerPreference: "high-performance"
     });
 
-    renderer.setSize(window.innerWidth, window.innerHeight);
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.7));
+    renderer.setSize(
+      window.innerWidth,
+      window.innerHeight
+    );
+
+    renderer.setPixelRatio(
+      Math.min(window.devicePixelRatio, 1.5)
+    );
+
     renderer.shadowMap.enabled = true;
     renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+
     renderer.toneMapping = THREE.ACESFilmicToneMapping;
     renderer.toneMappingExposure = 1.1;
 
     container.appendChild(renderer.domElement);
 
-    // Lumière générale très douce.
-    scene.add(new THREE.HemisphereLight(0xb7c0c7, 0x16120e, 1.0));
+    // --------------------------------------------------
+    // 2. ÉCLAIRAGE
+    // --------------------------------------------------
 
-    const mainLight = new THREE.DirectionalLight(0xd9d0bd, 1.4);
+    const ambientLight = new THREE.HemisphereLight(
+      0xb7c0c7,
+      0x16120e,
+      1.2
+    );
+
+    scene.add(ambientLight);
+
+    const mainLight = new THREE.DirectionalLight(
+      0xd9d0bd,
+      1.8
+    );
+
     mainLight.position.set(3, 8, 5);
     mainLight.castShadow = true;
+
     scene.add(mainLight);
 
-    // Lumières chaudes qui ponctuent le parcours.
-    const lightPositions = [
-      [-4, 3.8, -4],
-      [0, 3.8, -8],
-      [4, 3.8, -4]
-    ];
+    const decorativeLights = [];
 
-    lightPositions.forEach(([x, y, z]) => {
-      const light = new THREE.PointLight(0xc7ad7b, 13, 9);
+    [
+      [-5, 3.7, -4],
+      [0, 3.7, -9],
+      [5, 3.7, -4]
+    ].forEach(([x, y, z]) => {
+      const light = new THREE.PointLight(
+        0xc7ad7b,
+        12,
+        11
+      );
+
       light.position.set(x, y, z);
       scene.add(light);
+
+      decorativeLights.push(light);
     });
 
-    function makeMaterial(color, roughness = 0.85) {
+    // --------------------------------------------------
+    // 3. MATÉRIAUX ET CONSTRUCTION ARCHITECTURALE
+    // --------------------------------------------------
+
+    function material(color, roughness = 0.85) {
       return new THREE.MeshStandardMaterial({
         color,
         roughness,
@@ -389,53 +441,96 @@
       });
     }
 
-    const stone = makeMaterial(0x242524);
-    const floorMaterial = makeMaterial(0x171918, 0.65);
-    const darkMetal = makeMaterial(0x333432, 0.45);
-    const goldMaterial = new THREE.MeshStandardMaterial({
+    const stone = material(0x292a28);
+    const floorMaterial = material(0x171918, 0.65);
+    const metal = material(0x353633, 0.5);
+
+    const gold = new THREE.MeshStandardMaterial({
       color: 0xc7ad7b,
       emissive: 0x72552b,
-      emissiveIntensity: 0.8,
-      metalness: 0.4,
+      emissiveIntensity: 1,
+      metalness: 0.35,
       roughness: 0.4
     });
 
-    function box(width, height, depth, material, x, y, z) {
+    function createBox(
+      width,
+      height,
+      depth,
+      mat,
+      x,
+      y,
+      z
+    ) {
       const mesh = new THREE.Mesh(
         new THREE.BoxGeometry(width, height, depth),
-        material
+        mat
       );
 
       mesh.position.set(x, y, z);
       mesh.castShadow = true;
       mesh.receiveShadow = true;
+
       scene.add(mesh);
+
       return mesh;
     }
 
-    // Sol monumental.
-    box(24, 0.4, 34, floorMaterial, 0, -0.25, -5);
+    // Sol.
+    createBox(
+      24, 0.4, 34,
+      floorMaterial,
+      0, -0.25, -5
+    );
 
     // Murs latéraux.
-    box(0.5, 6, 28, stone, -8, 2.8, -5);
-    box(0.5, 6, 28, stone, 8, 2.8, -5);
+    createBox(
+      0.5, 6, 28,
+      stone,
+      -8, 2.8, -5
+    );
+
+    createBox(
+      0.5, 6, 28,
+      stone,
+      8, 2.8, -5
+    );
 
     // Mur du fond.
-    box(16, 6, 0.5, stone, 0, 2.8, -19);
+    createBox(
+      16, 6, 0.5,
+      stone,
+      0, 2.8, -19
+    );
 
-    // Plafond sombre.
-    box(16, 0.35, 28, darkMetal, 0, 5.8, -5);
+    // Plafond.
+    createBox(
+      16, 0.35, 28,
+      metal,
+      0, 5.8, -5
+    );
 
-    // Grandes dalles au sol pour accentuer la perspective.
+    // Dalles du sol.
     for (let z = 8; z >= -18; z -= 3) {
-      box(15.7, 0.025, 0.035, darkMetal, 0, -0.03, z);
+      createBox(
+        15.7, 0.025, 0.035,
+        metal,
+        0, -0.03, z
+      );
     }
 
     for (let x = -7; x <= 7; x += 2.5) {
-      box(0.025, 0.025, 27, darkMetal, x, -0.03, -5);
+      createBox(
+        0.025, 0.025, 27,
+        metal,
+        x, -0.03, -5
+      );
     }
 
-    // Stèles verticales, comme des fragments de mémoire.
+    // --------------------------------------------------
+    // 4. STÈLES DE MÉMOIRE
+    // --------------------------------------------------
+
     const stelePositions = [
       [-5.3, -4],
       [5.3, -4],
@@ -445,42 +540,27 @@
       [3.2, -15]
     ];
 
-    stelePositions.forEach(([x, z], index) => {
-      box(0.16, 3.3, 0.7, darkMetal, x, 1.45, z);
-
-      const marker = new THREE.Mesh(
-        new THREE.BoxGeometry(0.025, 1.5, 0.025),
-        goldMaterial
+    stelePositions.forEach(([x, z]) => {
+      createBox(
+        0.16, 3.3, 0.7,
+        metal,
+        x, 1.45, z
       );
 
-      marker.position.set(x, 1.6, z + 0.37);
-      scene.add(marker);
-    });
-
-    // Panneaux de mémoire sur le mur du fond.
-    const panelPositions = [-5.1, -2.55, 0, 2.55, 5.1];
-
-    panelPositions.forEach((x, index) => {
-      box(1.45, 2.6, 0.12, darkMetal, x, 2.6, -18.65);
-
-      box(
-        0.035,
-        1.8,
-        0.025,
-        goldMaterial,
-        x - 0.48,
-        2.75,
-        -18.56
+      createBox(
+        0.025, 1.5, 0.025,
+        gold,
+        x, 1.6, z + 0.37
       );
-
-      const panelLight = new THREE.PointLight(0xc7ad7b, 1.8, 3.5);
-      panelLight.position.set(x, 4.2, -17.8);
-      scene.add(panelLight);
     });
 
-    // Crée un texte sur une texture pour les panneaux.
-    function makeTextTexture(title, subtitle) {
+    // --------------------------------------------------
+    // 5. PANNEAUX DE MÉMOIRE
+    // --------------------------------------------------
+
+    function createTextTexture(title, subtitle) {
       const canvas = document.createElement("canvas");
+
       canvas.width = 512;
       canvas.height = 512;
 
@@ -504,8 +584,12 @@
       ctx.fillStyle = "#77766f";
       ctx.fillRect(48, 285, 100, 2);
 
-      return new THREE.CanvasTexture(canvas);
+      const texture = new THREE.CanvasTexture(canvas);
+
+      return texture;
     }
+
+    const panelPositions = [-5.1, -2.55, 0, 2.55, 5.1];
 
     const panelTexts = [
       ["Résister", "L'engagement clandestin"],
@@ -516,7 +600,13 @@
     ];
 
     panelPositions.forEach((x, index) => {
-      const texture = makeTextTexture(
+      createBox(
+        1.45, 2.6, 0.12,
+        metal,
+        x, 2.6, -18.65
+      );
+
+      const texture = createTextTexture(
         panelTexts[index][0],
         panelTexts[index][1]
       );
@@ -529,21 +619,25 @@
         })
       );
 
-      textPanel.position.set(x, 2.65, -18.55);
+      textPanel.position.set(x, 2.65, -18.57);
+
       scene.add(textPanel);
     });
 
-    // Points interactifs du parcours.
+    // --------------------------------------------------
+    // 6. POINTS LUMINEUX INTERACTIFS
+    // --------------------------------------------------
+
     const hotspots = [
       {
         position: new THREE.Vector3(-5.3, 2.2, -4),
         title: "Résister",
-        text: "Découvrez les différentes formes d'engagement des femmes dans la Résistance. Les récits et documents historiques devront être vérifiés avant publication."
+        text: "Découvrez les différentes formes d'engagement des femmes dans la Résistance. Les récits, les biographies et les documents historiques devront être vérifiés avant publication."
       },
       {
         position: new THREE.Vector3(5.3, 2.2, -4),
         title: "Transmettre",
-        text: "Explorez les gestes de solidarité, les réseaux clandestins et les moyens de préserver la mémoire des personnes engagées."
+        text: "Explorez les actes de solidarité, les réseaux clandestins et les moyens de préserver la mémoire des femmes engagées."
       },
       {
         position: new THREE.Vector3(0, 2.2, -14),
@@ -555,30 +649,35 @@
     const hotspotMeshes = [];
 
     hotspots.forEach((item, index) => {
-      const geometry = new THREE.SphereGeometry(0.14, 24, 24);
+      const sphere = new THREE.Mesh(
+        new THREE.SphereGeometry(0.14, 24, 24),
+        new THREE.MeshStandardMaterial({
+          color: 0xe5c994,
+          emissive: 0xc7ad7b,
+          emissiveIntensity: 2
+        })
+      );
 
-      const material = new THREE.MeshStandardMaterial({
-        color: 0xe5c994,
-        emissive: 0xc7ad7b,
-        emissiveIntensity: 2
-      });
-
-      const sphere = new THREE.Mesh(geometry, material);
       sphere.position.copy(item.position);
       sphere.userData.hotspotIndex = index;
+
       scene.add(sphere);
+      hotspotMeshes.push(sphere);
 
       const halo = new THREE.Mesh(
         new THREE.TorusGeometry(0.25, 0.018, 8, 32),
-        goldMaterial
+        gold
       );
 
       halo.position.copy(item.position);
       halo.rotation.x = Math.PI / 2;
-      scene.add(halo);
 
-      hotspotMeshes.push(sphere);
+      scene.add(halo);
     });
+
+    // --------------------------------------------------
+    // 7. OUVERTURE DES INFORMATIONS
+    // --------------------------------------------------
 
     const raycaster = new THREE.Raycaster();
     const pointer = new THREE.Vector2();
@@ -588,46 +687,63 @@
     const hotspotText = document.getElementById("hotspot-text");
 
     renderer.domElement.addEventListener("click", (event) => {
-      pointer.x = (event.clientX / window.innerWidth) * 2 - 1;
-      pointer.y = -(event.clientY / window.innerHeight) * 2 + 1;
+      pointer.x =
+        (event.clientX / window.innerWidth) * 2 - 1;
+
+      pointer.y =
+        -(event.clientY / window.innerHeight) * 2 + 1;
 
       raycaster.setFromCamera(pointer, camera);
 
       const hits = raycaster.intersectObjects(hotspotMeshes);
 
-      if (hits.length > 0) {
-        const item = hotspots[hits[0].object.userData.hotspotIndex];
-
-        hotspotTitle.textContent = item.title;
-        hotspotText.textContent = item.text;
-        hotspotBox.classList.add("visible");
-
-        hotspotBox.style.left = Math.min(
-          event.clientX + 15,
-          window.innerWidth - 275
-        ) + "px";
-
-        hotspotBox.style.top = Math.min(
-          event.clientY + 15,
-          window.innerHeight - 190
-        ) + "px";
+      if (hits.length === 0) {
+        return;
       }
+
+      const item =
+        hotspots[hits[0].object.userData.hotspotIndex];
+
+      hotspotTitle.textContent = item.title;
+      hotspotText.textContent = item.text;
+
+      hotspotBox.classList.add("visible");
+
+      const left = Math.min(
+        event.clientX + 15,
+        window.innerWidth - 300
+      );
+
+      const top = Math.min(
+        event.clientY + 15,
+        window.innerHeight - 220
+      );
+
+      hotspotBox.style.left = Math.max(10, left) + "px";
+      hotspotBox.style.top = Math.max(10, top) + "px";
     });
 
-    document.getElementById("close-hotspot").addEventListener("click", () => {
-      hotspotBox.classList.remove("visible");
-    });
+    document
+      .getElementById("close-hotspot")
+      .addEventListener("click", () => {
+        hotspotBox.classList.remove("visible");
+      });
 
-    // Mouvement subtil de la caméra avec la souris.
-    let targetX = 0;
-    let targetY = 0;
+    // --------------------------------------------------
+    // 8. ANIMATION CONTINUE DE LA CAMÉRA
+    // --------------------------------------------------
+
+    let mouseX = 0;
+    let mouseY = 0;
 
     window.addEventListener("pointermove", (event) => {
-      targetX = (event.clientX / window.innerWidth - 0.5) * 0.7;
-      targetY = (event.clientY / window.innerHeight - 0.5) * 0.2;
+      mouseX =
+        (event.clientX / window.innerWidth - 0.5) * 2;
+
+      mouseY =
+        (event.clientY / window.innerHeight - 0.5) * 2;
     });
 
-    // Animation.
     const clock = new THREE.Clock();
 
     function animate() {
@@ -635,30 +751,68 @@
 
       const time = clock.getElapsedTime();
 
-      camera.position.x += (targetX - camera.position.x * 0.08) * 0.015;
-      camera.position.y += (
-        2.2 + targetY - camera.position.y
-      ) * 0.015;
+      // La caméra bouge même si la souris reste immobile.
+      const automaticX = Math.sin(time * 0.25) * 0.35;
+      const automaticY = Math.sin(time * 0.4) * 0.08;
 
-      camera.lookAt(0, 1.5, -5);
+      const desiredX =
+        automaticX + mouseX * 1.2;
 
+      const desiredY =
+        2.2 + automaticY - mouseY * 0.25;
+
+      camera.position.x +=
+        (desiredX - camera.position.x) * 0.025;
+
+      camera.position.y +=
+        (desiredY - camera.position.y) * 0.025;
+
+      // Le regard évolue légèrement pour renforcer la sensation
+      // d'exploration de l'architecture.
+      camera.lookAt(
+        mouseX * 0.8,
+        1.5 + automaticY,
+        -5
+      );
+
+      // Pulsation des points de mémoire.
       hotspotMeshes.forEach((mesh, index) => {
-        mesh.scale.setScalar(
-          1 + Math.sin(time * 2 + index) * 0.12
-        );
+        const pulse =
+          1 + Math.sin(time * 2 + index * 1.5) * 0.18;
+
+        mesh.scale.setScalar(pulse);
+      });
+
+      // Variation subtile de l'éclairage.
+      decorativeLights.forEach((light, index) => {
+        light.intensity =
+          12 + Math.sin(time * 0.8 + index) * 1.2;
       });
 
       renderer.render(scene, camera);
     }
 
+    // --------------------------------------------------
+    // 9. ADAPTATION À LA TAILLE DE L'ÉCRAN
+    // --------------------------------------------------
+
     window.addEventListener("resize", () => {
-      camera.aspect = window.innerWidth / window.innerHeight;
+      camera.aspect =
+        window.innerWidth / window.innerHeight;
+
       camera.updateProjectionMatrix();
 
-      renderer.setSize(window.innerWidth, window.innerHeight);
-      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.7));
+      renderer.setSize(
+        window.innerWidth,
+        window.innerHeight
+      );
+
+      renderer.setPixelRatio(
+        Math.min(window.devicePixelRatio, 1.5)
+      );
     });
 
+    // Démarrage de l'animation.
     animate();
 
     loading.classList.add("hidden");
@@ -667,5 +821,6 @@
       loading.remove();
     }, 900);
   </script>
+
 </body>
 </html>
