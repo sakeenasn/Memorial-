@@ -1,102 +1,526 @@
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Visite en réalité virtuelle — Mémorial des femmes en résistance</title>
-<link rel="stylesheet" href="styles.css">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/aframe/1.5.0/aframe.min.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="description"
+          content="Prototype de mémorial numérique consacré aux femmes résistantes et déportées pendant la Seconde Guerre mondiale.">
+
+    <title>Mémorial — Romainville | Les voix de la mémoire</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap"
+          rel="stylesheet">
+
+    <script src="script.js" defer></script>
 </head>
+
 <body>
-<a href="#main" class="skip-link">Aller au contenu</a>
 
-<header class="site-header">
-  <div class="nav-wrap">
-    <a href="index.html" class="site-title">
-      <span class="small">FORT DE ROMAINVILLE · OUVERTURE 2028</span>
-      Mémorial des femmes en résistance
-    </a>
-    <ul class="nav-links">
-      <li><a href="index.html">Histoire du lieu</a></li>
-      <li><a href="histoires.html">Portraits</a></li>
-      <li><a href="jeux.html">Parcours ludiques</a></li>
-      <li><a href="vr.html" aria-current="page">Visite en réalité virtuelle</a></li>
-    </ul>
-  </div>
-</header>
+    <!-- NAVIGATION -->
 
-<main id="main">
+    <header class="header">
 
-  <section style="padding-top:3em;">
-    <h1 style="font-size:2rem; max-width:34ch;">Trois points du fort, en vue à 360°</h1>
-    <p style="color:var(--ink-muted); max-width:60ch; margin-top:1em;">
-      Prototype construit avec A-Frame. Les trois environnements ci-dessous sont des <strong>placeholders de couleur et de texte</strong> ; la version finale utiliserait de vraies prises de vue à 360° du fort, avec des points d'intérêt cliquables ancrés dans l'image réelle.
-    </p>
-  </section>
+        <a href="#accueil" class="logo">
+            <span class="logo-symbol">M.</span>
+            <span class="logo-text">
+                MÉMORIAL
+                <small>ROMAINVILLE · PROJET 2028</small>
+            </span>
+        </a>
 
-  <section aria-labelledby="vr-title">
-    <div class="section-head">
-      <h2 id="vr-title" style="font-size:1.3rem;">Parcours</h2>
-    </div>
+        <button class="menu-toggle"
+                id="menu-toggle"
+                aria-label="Ouvrir le menu"
+                aria-expanded="false">
+            <span></span>
+            <span></span>
+        </button>
 
-    <div class="vr-stops" role="group" aria-label="Choisir un point de la visite">
-      <button class="vr-stop" data-stop="cour" aria-pressed="true">1 — La cour d'honneur</button>
-      <button class="vr-stop" data-stop="casemate" aria-pressed="false">2 — Une casemate</button>
-      <button class="vr-stop" data-stop="mur" aria-pressed="false">3 — Le mur du souvenir</button>
-    </div>
+        <nav class="navigation" id="navigation">
+            <a href="#histoire">Le mémorial</a>
+            <a href="#portraits">Les histoires</a>
+            <a href="#chronologie">Chronologie</a>
+            <a href="#exploration" class="nav-button">Explorer le mémorial ↗</a>
+        </nav>
 
-    <div class="vr-stage" style="margin-top:1em; height:60vh; min-height:360px;">
-      <a-scene embedded vr-mode-ui="enabled: true" style="width:100%; height:100%;">
-        <a-sky id="vr-sky" color="#2b2f22"></a-sky>
-        <a-entity id="vr-text" position="0 1.6 -3">
-          <a-text value="La cour d'honneur" align="center" color="#ece7d9" width="6"></a-text>
-        </a-entity>
-        <a-camera position="0 1.6 0" look-controls wasd-controls></a-camera>
-      </a-scene>
-    </div>
+    </header>
 
-    <p class="vr-caption" id="vr-caption">
-      <strong>La cour d'honneur</strong>
-      Lieu de rassemblement des internées, visible depuis les fenêtres des casemates. C'est ici que se déroulaient les appels.
-    </p>
-  </section>
 
-</main>
+    <main>
 
-<footer>
-  <span>Prototype non officiel — projet d'étude, sans lien avec le Musée de la Résistance nationale.</span>
-  <span>Fort de Romainville, Les Lilas (93)</span>
-</footer>
+        <!-- PAGE D'ACCUEIL -->
 
-<script>
-  const stops = {
-    cour: {
-      color: '#2b2f22',
-      label: "La cour d'honneur",
-      caption: "Lieu de rassemblement des internées, visible depuis les fenêtres des casemates. C'est ici que se déroulaient les appels."
-    },
-    casemate: {
-      color: '#1c1a16',
-      label: "Une casemate",
-      caption: "Les casemates voûtées servaient de dortoirs collectifs, dans des conditions d'hygiène et de surpopulation très dures."
-    },
-    mur: {
-      color: '#241414',
-      label: "Le mur du souvenir",
-      caption: "Emplacement imaginé pour le futur mur portant les noms des femmes passées par Romainville avant leur déportation."
-    }
-  };
+        <section class="hero" id="accueil">
 
-  document.querySelectorAll('.vr-stop').forEach(btn => {
-    btn.addEventListener('click', () => {
-      document.querySelectorAll('.vr-stop').forEach(b => b.setAttribute('aria-pressed','false'));
-      btn.setAttribute('aria-pressed','true');
-      const data = stops[btn.dataset.stop];
-      document.getElementById('vr-sky').setAttribute('color', data.color);
-      document.getElementById('vr-text').innerHTML = `<a-text value="${data.label}" align="center" color="#ece7d9" width="6"></a-text>`;
-      document.getElementById('vr-caption').innerHTML = `<strong>${data.label}</strong>${data.caption}`;
-    });
-  });
-</script>
+            <div class="hero-background"></div>
+            <div class="hero-overlay"></div>
+
+            <div class="hero-content">
+
+                <p class="eyebrow">
+                    MÉMOIRE · TRANSMISSION · HISTOIRE
+                </p>
+
+                <h1>
+                    Certaines histoires<br>
+                    ne doivent <em>jamais</em><br>
+                    disparaître.
+                </h1>
+
+                <p class="hero-description">
+                    Derrière la grande Histoire, il y a des vies,
+                    des visages et des voix. Un mémorial numérique
+                    pour découvrir les parcours des femmes qui ont
+                    résisté et celles qui ont été déportées.
+                </p>
+
+                <div class="hero-actions">
+
+                    <a href="#portraits" class="button button-light">
+                        Découvrir leurs histoires <span>↗</span>
+                    </a>
+
+                    <a href="#histoire" class="button button-outline">
+                        Comprendre le mémorial
+                    </a>
+
+                </div>
+
+            </div>
+
+            <div class="hero-bottom">
+
+                <span>ROMAINVILLE · SECONDE GUERRE MONDIALE</span>
+
+                <a href="#histoire" class="scroll-indicator">
+                    DÉFILER POUR EXPLORER <span>↓</span>
+                </a>
+
+            </div>
+
+            <div class="hero-index">
+                <span>01</span>
+                <span class="index-line"></span>
+                <span>05</span>
+            </div>
+
+        </section>
+
+
+        <!-- INTRODUCTION -->
+
+        <section class="intro section-padding" id="histoire">
+
+            <div class="section-label">
+                <span>01 / LE MÉMORIAL</span>
+                <span>UNE MÉMOIRE VIVANTE</span>
+            </div>
+
+            <div class="intro-grid">
+
+                <div>
+                    <p class="eyebrow">AU-DELÀ DES DATES</p>
+
+                    <h2>
+                        L'Histoire se raconte.<br>
+                        La mémoire se <em>transmet.</em>
+                    </h2>
+                </div>
+
+                <div class="intro-text">
+
+                    <p>
+                        Comprendre le passé, c'est aussi écouter
+                        celles et ceux qui l'ont vécu. Chaque
+                        témoignage révèle une trajectoire singulière
+                        et contribue à notre compréhension de
+                        l'histoire collective.
+                    </p>
+
+                    <p>
+                        Ce prototype imagine une nouvelle manière
+                        de découvrir la mémoire : explorer des récits,
+                        consulter des archives et parcourir un
+                        environnement numérique interactif.
+                    </p>
+
+                    <a href="#chronologie" class="text-link">
+                        Découvrir le parcours historique <span>↗</span>
+                    </a>
+
+                </div>
+
+            </div>
+
+            <div class="quote-card">
+
+                <span class="quote-mark">“</span>
+
+                <blockquote>
+                    Transmettre la mémoire, c'est donner aux
+                    générations futures les moyens de comprendre
+                    le passé.
+                </blockquote>
+
+                <p>
+                    UNE INVITATION À DÉCOUVRIR, COMPRENDRE ET TRANSMETTRE
+                </p>
+
+            </div>
+
+        </section>
+
+
+        <!-- HISTOIRES PERSONNELLES -->
+
+        <section class="stories section-padding" id="portraits">
+
+            <div class="section-label">
+                <span>02 / HISTOIRES PERSONNELLES</span>
+                <span>DES VIES, DES PARCOURS, DES ENGAGEMENTS</span>
+            </div>
+
+            <div class="section-heading">
+
+                <div>
+                    <p class="eyebrow">DERRIÈRE L'HISTOIRE</p>
+
+                    <h2>
+                        Des destins.<br>
+                        Des <em>mémoires.</em>
+                    </h2>
+                </div>
+
+                <p class="heading-description">
+                    Chaque vie porte une histoire.
+                    Explorez les récits individuels pour
+                    découvrir l'histoire autrement.
+                </p>
+
+            </div>
+
+
+            <div class="story-grid">
+
+                <article class="story-card story-featured">
+
+                    <div class="story-image image-one">
+                        <span class="image-number">01</span>
+                        <span class="image-caption">RÉCIT · RÉSISTANCE</span>
+                    </div>
+
+                    <div class="story-info">
+                        <p class="story-category">ENGAGEMENT & RÉSISTANCE</p>
+
+                        <h3>Une vie, un engagement</h3>
+
+                        <p>
+                            Découvrez comment un engagement individuel
+                            peut s'inscrire dans une histoire collective.
+                        </p>
+
+                        <button class="story-link"
+                                data-story="resistance">
+                            Explorer ce récit <span>↗</span>
+                        </button>
+                    </div>
+
+                </article>
+
+
+                <article class="story-card">
+
+                    <div class="story-image image-two">
+                        <span class="image-number">02</span>
+                        <span class="image-caption">RÉCIT · MÉMOIRE</span>
+                    </div>
+
+                    <div class="story-info">
+                        <p class="story-category">PARCOURS PERSONNEL</p>
+
+                        <h3>Une histoire à transmettre</h3>
+
+                        <p>
+                            Un parcours individuel pour comprendre
+                            les réalités d'une époque.
+                        </p>
+
+                        <button class="story-link"
+                                data-story="memoire">
+                            Explorer ce récit <span>↗</span>
+                        </button>
+                    </div>
+
+                </article>
+
+
+                <article class="story-card">
+
+                    <div class="story-image image-three">
+                        <span class="image-number">03</span>
+                        <span class="image-caption">RÉCIT · TÉMOIGNAGE</span>
+                    </div>
+
+                    <div class="story-info">
+                        <p class="story-category">TÉMOIGNAGES & ARCHIVES</p>
+
+                        <h3>Les traces du passé</h3>
+
+                        <p>
+                            Lettres, photographies et documents :
+                            les archives éclairent les histoires humaines.
+                        </p>
+
+                        <button class="story-link"
+                                data-story="archives">
+                            Explorer ce récit <span>↗</span>
+                        </button>
+                    </div>
+
+                </article>
+
+            </div>
+
+            <p class="prototype-note">
+                Les récits présentés dans cette démonstration sont
+                des entrées éditoriales fictives. Ils ne représentent
+                pas des témoignages historiques authentifiés.
+            </p>
+
+        </section>
+
+
+        <!-- CHRONOLOGIE -->
+
+        <section class="timeline section-padding" id="chronologie">
+
+            <div class="section-label">
+                <span>03 / REPÈRES HISTORIQUES</span>
+                <span>COMPRENDRE LE CONTEXTE</span>
+            </div>
+
+            <div class="section-heading">
+
+                <div>
+                    <p class="eyebrow">UNE HISTOIRE À EXPLORER</p>
+
+                    <h2>
+                        Se souvenir<br>
+                        pour <em>comprendre.</em>
+                    </h2>
+                </div>
+
+                <p class="heading-description">
+                    Quelques repères pour situer les événements
+                    et replacer les parcours individuels
+                    dans leur contexte historique.
+                </p>
+
+            </div>
+
+
+            <div class="timeline-list">
+
+                <article class="timeline-item">
+                    <span class="timeline-year">1939</span>
+
+                    <div class="timeline-marker"></div>
+
+                    <div class="timeline-content">
+                        <h3>Le début de la Seconde Guerre mondiale</h3>
+
+                        <p>
+                            Le 1er septembre 1939, l'Allemagne envahit
+                            la Pologne. La guerre s'étend progressivement
+                            en Europe.
+                        </p>
+                    </div>
+                </article>
+
+
+                <article class="timeline-item">
+                    <span class="timeline-year">1940</span>
+
+                    <div class="timeline-marker"></div>
+
+                    <div class="timeline-content">
+                        <h3>L'occupation et les premiers engagements</h3>
+
+                        <p>
+                            Après la défaite française et l'armistice
+                            de juin 1940, des formes de résistance
+                            se développent progressivement.
+                        </p>
+                    </div>
+                </article>
+
+
+                <article class="timeline-item">
+                    <span class="timeline-year">1941–1944</span>
+
+                    <div class="timeline-marker"></div>
+
+                    <div class="timeline-content">
+                        <h3>Résistance, répression et déportation</h3>
+
+                        <p>
+                            Des femmes participent à de multiples
+                            formes de résistance. Les arrestations,
+                            les persécutions et les déportations
+                            frappent les populations ciblées par
+                            l'occupant et le régime de Vichy.
+                        </p>
+                    </div>
+                </article>
+
+
+                <article class="timeline-item">
+                    <span class="timeline-year">1944–1945</span>
+
+                    <div class="timeline-marker"></div>
+
+                    <div class="timeline-content">
+                        <h3>Libération et retour des déportées</h3>
+
+                        <p>
+                            La Libération de la France en 1944
+                            et la fin de la guerre en Europe en 1945
+                            ouvrent une nouvelle période, marquée
+                            aussi par le retour des survivantes
+                            et la nécessité de témoigner.
+                        </p>
+                    </div>
+                </article>
+
+            </div>
+
+            <p class="prototype-note">
+                Repères introductifs à compléter et à vérifier
+                à partir de sources historiques institutionnelles.
+            </p>
+
+        </section>
+
+
+        <!-- EXPLORATION IMMERSIVE -->
+
+        <section class="exploration section-padding" id="exploration">
+
+            <div class="exploration-background"></div>
+
+            <div class="exploration-content">
+
+                <p class="eyebrow">04 / EXPÉRIENCE IMMERSIVE</p>
+
+                <h2>
+                    Entrer dans<br>
+                    l'histoire.
+                </h2>
+
+                <p>
+                    Et si la mémoire devenait un lieu à explorer ?
+                    Imaginez un parcours numérique dans lequel
+                    chaque espace révèle une histoire, chaque
+                    document ouvre une perspective et chaque
+                    découverte invite à poursuivre.
+                </p>
+
+                <button class="button button-light"
+                        id="explore-button">
+                    Découvrir le concept <span>↗</span>
+                </button>
+
+                <span class="exploration-note">
+                    EXPÉRIENCE 3D · CONCEPT EN COURS DE DÉVELOPPEMENT
+                </span>
+
+            </div>
+
+        </section>
+
+
+        <!-- TRANSMISSION -->
+
+        <section class="transmission section-padding">
+
+            <p class="eyebrow">05 / TRANSMETTRE</p>
+
+            <h2>
+                La mémoire ne s'arrête pas<br>
+                à ceux qui l'ont vécue.
+            </h2>
+
+            <p>
+                Elle continue à vivre dans les histoires que
+                nous partageons et les questions que nous
+                transmettons aux générations futures.
+            </p>
+
+            <a href="#accueil" class="button button-dark">
+                Revenir au début ↑
+            </a>
+
+        </section>
+
+    </main>
+
+
+    <!-- FENÊTRE INTERACTIVE -->
+
+    <dialog class="story-dialog" id="story-dialog">
+
+        <button class="dialog-close"
+                id="dialog-close"
+                aria-label="Fermer">
+            ×
+        </button>
+
+        <p class="eyebrow" id="dialog-category">
+            EXPLORER
+        </p>
+
+        <h2 id="dialog-title">Une histoire à découvrir</h2>
+
+        <p id="dialog-description"></p>
+
+        <p class="dialog-note">
+            Contenu de démonstration : ce récit n'est pas
+            un témoignage historique authentifié.
+        </p>
+
+    </dialog>
+
+
+    <!-- PIED DE PAGE -->
+
+    <footer class="footer">
+
+        <a href="#accueil" class="logo">
+            <span class="logo-symbol">M.</span>
+
+            <span class="logo-text">
+                MÉMORIAL
+                <small>ROMAINVILLE · PROJET 2028</small>
+            </span>
+        </a>
+
+        <p>
+            Un prototype de médiation numérique consacré
+            à la mémoire des femmes résistantes et déportées.
+        </p>
+
+        <span class="footer-credit">
+            CONCEPT NUMÉRIQUE · VERSION PROTOTYPE
+        </span>
+
+    </footer>
+
 </body>
 </html>
