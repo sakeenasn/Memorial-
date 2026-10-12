@@ -1,0 +1,888 @@
+/* =====================================
+   1. VARIABLES ET BASE
+===================================== */
+:root {
+    --background: #11120f;
+    --surface: #191a16;
+    --text: #f1eee6;
+    --muted: #a6a59b;
+    --accent: #c4a77d;
+    --line: rgba(241, 238, 230, 0.16);
+    --serif: "Playfair Display", Georgia, serif;
+    --sans: "DM Sans", Arial, sans-serif;
+}
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 90px;
+}
+body {
+    background: var(--background);
+    color: var(--text);
+    font-family: var(--sans);
+    line-height: 1.7;
+    overflow-x: hidden;
+}
+body,
+button,
+a {
+    -webkit-tap-highlight-color: transparent;
+}
+a {
+    color: inherit;
+    text-decoration: none;
+}
+button {
+    font: inherit;
+}
+button:focus-visible,
+a:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 5px;
+}
+::selection {
+    background: var(--accent);
+    color: var(--background);
+}
+.section-padding {
+    padding: 110px 9%;
+}
+.eyebrow {
+    color: var(--accent);
+    font-size: 0.69rem;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    margin-bottom: 28px;
+}
+h1,
+h2,
+h3 {
+    font-weight: 400;
+}
+h1,
+h2 {
+    font-family: var(--serif);
+    line-height: 1.13;
+}
+h1 em,
+h2 em {
+    color: var(--accent);
+    font-weight: 400;
+}
+button {
+    cursor: pointer;
+}
+/* =====================================
+   2. NAVIGATION
+===================================== */
+.header {
+    position: absolute;
+    z-index: 20;
+    top: 0;
+    left: 0;
+    width: 100%;
+    min-height: 94px;
+    padding: 20px 6%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+}
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+.logo-symbol {
+    font-family: var(--serif);
+    font-size: 2.3rem;
+    color: var(--accent);
+}
+.logo-text {
+    font-size: 0.78rem;
+    letter-spacing: 0.15em;
+    font-weight: 700;
+    line-height: 1.6;
+}
+.logo-text small {
+    display: block;
+    color: var(--muted);
+    font-size: 0.55rem;
+    letter-spacing: 0.12em;
+    font-weight: 400;
+}
+.navigation {
+    display: flex;
+    align-items: center;
+    gap: 32px;
+}
+.navigation a {
+    font-size: 0.76rem;
+    color: #e4e0d7;
+    transition: color 0.3s ease;
+}
+.navigation a:hover {
+    color: var(--accent);
+}
+.navigation .nav-button {
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    padding: 12px 18px;
+}
+.menu-toggle {
+    display: none;
+    background: transparent;
+    border: 0;
+    color: white;
+}
+/* =====================================
+   3. ACCUEIL IMMERSIF
+===================================== */
+.hero {
+    position: relative;
+    min-height: 780px;
+    height: 100svh;
+    max-height: 1100px;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+    padding: 140px 12% 120px;
+}
+.hero-background,
+.hero-overlay {
+    position: absolute;
+    inset: 0;
+}
+.hero-background {
+    background-image:
+        url("https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=2000&q=85");
+    background-size: cover;
+    background-position: center;
+    transform: scale(1.04);
+    animation: background-reveal 1.8s ease-out forwards;
+}
+.hero-overlay {
+    background:
+        linear-gradient(
+            90deg,
+            rgba(12, 13, 11, 0.95) 0%,
+            rgba(12, 13, 11, 0.76) 47%,
+            rgba(12, 13, 11, 0.24) 100%
+        ),
+        linear-gradient(
+            0deg,
+            rgba(12, 13, 11, 0.65),
+            transparent 35%
+        );
+}
+.hero-content {
+    position: relative;
+    z-index: 2;
+    max-width: 790px;
+    animation: content-reveal 1s 0.2s both;
+}
+.hero h1 {
+    font-size: clamp(3.4rem, 7vw, 6.7rem);
+    letter-spacing: -0.045em;
+    margin-bottom: 30px;
+}
+.hero-description {
+    color: #d2d0c8;
+    font-size: 0.95rem;
+    max-width: 500px;
+    line-height: 1.9;
+    margin-bottom: 38px;
+}
+.hero-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px;
+}
+.button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 25px;
+    padding: 16px 22px;
+    font-size: 0.77rem;
+    border: 1px solid transparent;
+    transition:
+        background 0.3s ease,
+        color 0.3s ease,
+        border-color 0.3s ease,
+        transform 0.3s ease;
+}
+.button:hover {
+    transform: translateY(-3px);
+}
+.button-light {
+    background: var(--text);
+    color: #171812;
+}
+.button-light:hover {
+    background: var(--accent);
+}
+.button-outline {
+    border-color: rgba(255, 255, 255, 0.45);
+    color: white;
+}
+.button-outline:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+}
+.hero-bottom {
+    position: absolute;
+    bottom: 35px;
+    left: 6%;
+    right: 6%;
+    z-index: 2;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    font-size: 0.59rem;
+    letter-spacing: 0.13em;
+    color: #d1cec5;
+}
+.scroll-indicator span {
+    margin-left: 12px;
+    color: var(--accent);
+    font-size: 1rem;
+}
+.hero-index {
+    position: absolute;
+    right: 5%;
+    top: 48%;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    font-size: 0.65rem;
+}
+.hero-index span:first-child {
+    color: var(--accent);
+}
+.index-line {
+    width: 1px;
+    height: 60px;
+    background: rgba(255, 255, 255, 0.45);
+}
+/* =====================================
+   4. INTRODUCTION
+===================================== */
+.intro {
+    background: var(--background);
+}
+.section-label {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid var(--line);
+    margin-bottom: 80px;
+    font-size: 0.62rem;
+    letter-spacing: 0.13em;
+    color: var(--muted);
+}
+.intro-grid {
+    display: grid;
+    grid-template-columns: 1.2fr 0.8fr;
+    gap: 10%;
+    align-items: start;
+}
+.intro h2,
+.section-heading h2 {
+    font-size: clamp(2.6rem, 4.5vw, 4.5rem);
+    letter-spacing: -0.035em;
+}
+.intro-text {
+    padding-top: 8px;
+}
+.intro-text p {
+    color: #bdbcb3;
+    font-size: 0.91rem;
+    margin-bottom: 23px;
+}
+.text-link {
+    display: inline-block;
+    margin-top: 12px;
+    color: var(--accent);
+    font-size: 0.78rem;
+}
+.text-link span {
+    margin-left: 12px;
+}
+.quote-card {
+    margin-top: 110px;
+    padding: 55px 8%;
+    border: 1px solid var(--line);
+    background:
+        radial-gradient(
+            ellipse at top right,
+            rgba(196, 167, 125, 0.08),
+            transparent 65%
+        ),
+        var(--surface);
+}
+.quote-mark {
+    font-family: var(--serif);
+    color: var(--accent);
+    font-size: 5rem;
+    line-height: 1;
+}
+.quote-card blockquote {
+    max-width: 850px;
+    font-family: var(--serif);
+    font-size: clamp(1.7rem, 3.3vw, 3rem);
+    line-height: 1.4;
+    margin: 12px 0 30px;
+}
+.quote-card p {
+    color: var(--muted);
+    font-size: 0.62rem;
+    letter-spacing: 0.13em;
+}
+/* =====================================
+   5. HISTOIRES PERSONNELLES
+===================================== */
+.stories {
+    background: #171813;
+}
+.section-heading {
+    display: flex;
+    justify-content: space-between;
+    align-items: end;
+    gap: 40px;
+    margin-bottom: 55px;
+}
+.heading-description {
+    color: #b7b6ad;
+    max-width: 350px;
+    font-size: 0.88rem;
+    padding-bottom: 8px;
+}
+.story-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 24px;
+}
+.story-card {
+    min-width: 0;
+    border: 1px solid var(--line);
+    background: #1d1e19;
+    transition:
+        transform 0.35s ease,
+        border-color 0.35s ease;
+}
+.story-card:hover {
+    transform: translateY(-6px);
+    border-color: rgba(196, 167, 125, 0.7);
+}
+.story-image {
+    position: relative;
+    min-height: 300px;
+    background-size: cover;
+    background-position: center;
+    overflow: hidden;
+}
+.story-image::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        0deg,
+        rgba(10, 11, 9, 0.75),
+        transparent 60%
+    );
+}
+.image-one {
+    background-image:
+        linear-gradient(rgba(50, 35, 25, 0.12), rgba(15, 15, 12, 0.25)),
+        url("https://images.unsplash.com/photo-1461360370896-922624d12aa1?auto=format&fit=crop&w=900&q=80");
+}
+.image-two {
+    background-image:
+        linear-gradient(rgba(50, 35, 25, 0.15), rgba(15, 15, 12, 0.25)),
+        url("https://images.unsplash.com/photo-1455390582262-044cdead277a?auto=format&fit=crop&w=900&q=80");
+}
+.image-three {
+    background-image:
+        linear-gradient(rgba(50, 35, 25, 0.15), rgba(15, 15, 12, 0.25)),
+        url("https://images.unsplash.com/photo-1516979187457-637abb4f9353?auto=format&fit=crop&w=900&q=80");
+}
+.image-number,
+.image-caption {
+    position: absolute;
+    z-index: 1;
+    color: white;
+}
+.image-number {
+    top: 18px;
+    left: 20px;
+    font-family: var(--serif);
+    font-size: 1.5rem;
+}
+.image-caption {
+    bottom: 17px;
+    left: 20px;
+    font-size: 0.6rem;
+    letter-spacing: 0.13em;
+}
+.story-info {
+    padding: 27px 23px 30px;
+}
+.story-category {
+    font-size: 0.59rem;
+    color: var(--accent);
+    letter-spacing: 0.12em;
+    margin-bottom: 13px;
+}
+.story-info h3 {
+    font-family: var(--serif);
+    font-size: 1.55rem;
+    line-height: 1.35;
+    margin-bottom: 15px;
+}
+.story-info > p:not(.story-category) {
+    color: #b7b6ad;
+    font-size: 0.81rem;
+    margin-bottom: 24px;
+}
+.story-link {
+    color: var(--text);
+    background: transparent;
+    border: 0;
+    border-bottom: 1px solid var(--line);
+    padding-bottom: 8px;
+    font-size: 0.75rem;
+    text-align: left;
+}
+.story-link span {
+    margin-left: 12px;
+    color: var(--accent);
+}
+.story-link:hover {
+    color: var(--accent);
+}
+.prototype-note {
+    margin-top: 25px;
+    color: var(--muted);
+    font-size: 0.72rem;
+    line-height: 1.8;
+}
+/* =====================================
+   6. CHRONOLOGIE
+===================================== */
+.timeline {
+    background: var(--background);
+}
+.timeline-list {
+    margin-top: 85px;
+    max-width: 1000px;
+    margin-left: auto;
+    margin-right: auto;
+}
+.timeline-item {
+    display: grid;
+    grid-template-columns: 130px 22px 1fr;
+    gap: 30px;
+    min-height: 175px;
+    position: relative;
+}
+.timeline-year {
+    font-family: var(--serif);
+    font-size: 1.65rem;
+    color: var(--accent);
+    padding-top: 1px;
+}
+.timeline-marker {
+    position: relative;
+    width: 10px;
+    height: 10px;
+    margin-top: 12px;
+    border: 1px solid var(--accent);
+    border-radius: 50%;
+    background: var(--background);
+}
+.timeline-item:not(:last-child) .timeline-marker::after {
+    content: "";
+    position: absolute;
+    width: 1px;
+    height: 180px;
+    top: 9px;
+    left: 3px;
+    background: var(--line);
+}
+.timeline-content {
+    padding-bottom: 48px;
+}
+.timeline-content h3 {
+    font-family: var(--serif);
+    font-size: 1.45rem;
+    margin-bottom: 12px;
+}
+.timeline-content p {
+    color: #b7b6ad;
+    font-size: 0.85rem;
+    max-width: 600px;
+}
+/* =====================================
+   7. EXPLORATION IMMERSIVE
+===================================== */
+.exploration {
+    position: relative;
+    min-height: 650px;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+}
+.exploration-background {
+    position: absolute;
+    inset: 0;
+    background-image:
+        linear-gradient(
+            90deg,
+            rgba(10, 11, 9, 0.96),
+            rgba(10, 11, 9, 0.72) 60%,
+            rgba(10, 11, 9, 0.5)
+        ),
+        url("https://images.unsplash.com/photo-1519681393784-d120267933ba?auto=format&fit=crop&w=2000&q=85");
+    background-size: cover;
+    background-position: center;
+}
+.exploration-content {
+    position: relative;
+    z-index: 1;
+    max-width: 650px;
+}
+.exploration h2 {
+    font-size: clamp(3.5rem, 7vw, 6rem);
+    margin-bottom: 25px;
+}
+.exploration-content > p:not(.eyebrow) {
+    color: #c5c3ba;
+    max-width: 480px;
+    font-size: 0.9rem;
+    margin-bottom: 32px;
+}
+.exploration-note {
+    display: block;
+    color: #c0bdb3;
+    font-size: 0.58rem;
+    letter-spacing: 0.12em;
+    margin-top: 25px;
+}
+/* =====================================
+   8. TRANSMISSION
+===================================== */
+.transmission {
+    text-align: center;
+    padding-top: 130px;
+    padding-bottom: 130px;
+}
+.transmission h2 {
+    font-size: clamp(2.5rem, 5vw, 4.6rem);
+    margin-bottom: 25px;
+}
+.transmission > p:not(.eyebrow) {
+    max-width: 600px;
+    margin: 0 auto 35px;
+    color: #b7b6ad;
+    font-size: 0.88rem;
+}
+.button-dark {
+    background: var(--accent);
+    color: #171812;
+}
+.button-dark:hover {
+    background: var(--text);
+}
+/* =====================================
+   9. FENÊTRE INTERACTIVE
+===================================== */
+.story-dialog {
+    position: fixed;
+    inset: 0;
+    margin: auto;
+    width: min(90%, 620px);
+    max-height: 85vh;
+    overflow-y: auto;
+    padding: 55px;
+    background: #1b1c17;
+    color: var(--text);
+    border: 1px solid rgba(196, 167, 125, 0.5);
+}
+.story-dialog::backdrop {
+    background: rgba(0, 0, 0, 0.82);
+    backdrop-filter: blur(6px);
+}
+.dialog-close {
+    position: absolute;
+    top: 15px;
+    right: 22px;
+    background: transparent;
+    color: var(--text);
+    border: 0;
+    font-size: 2rem;
+}
+.story-dialog h2 {
+    font-family: var(--serif);
+    font-size: 2.3rem;
+    margin-bottom: 22px;
+}
+.story-dialog > p:not(.eyebrow) {
+    color: #c6c4bb;
+    font-size: 0.9rem;
+}
+.story-dialog .dialog-note {
+    margin-top: 30px;
+    padding-top: 20px;
+    border-top: 1px solid var(--line);
+    color: var(--accent);
+    font-size: 0.72rem;
+}
+/* =====================================
+   10. PIED DE PAGE
+===================================== */
+.footer {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+    padding: 45px 9%;
+    border-top: 1px solid var(--line);
+    background: #0c0d0b;
+}
+.footer > p {
+    color: var(--muted);
+    font-size: 0.78rem;
+    max-width: 400px;
+    justify-self: end;
+}
+.footer-credit {
+    grid-column: 1 / -1;
+    padding-top: 25px;
+    border-top: 1px solid var(--line);
+    color: var(--muted);
+    font-size: 0.6rem;
+    letter-spacing: 0.13em;
+}
+/* =====================================
+   11. ANIMATIONS
+===================================== */
+@keyframes content-reveal {
+    from {
+        opacity: 0;
+        transform: translateY(25px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+@keyframes background-reveal {
+    from {
+        transform: scale(1.08);
+    }
+    to {
+        transform: scale(1);
+    }
+}
+/* =====================================
+   12. RESPONSIVE
+===================================== */
+@media (max-width: 1000px) {
+    .section-padding {
+        padding: 85px 6%;
+    }
+    .navigation {
+        gap: 18px;
+    }
+    .navigation a {
+        font-size: 0.7rem;
+    }
+    .story-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+    .story-card:last-child {
+        grid-column: 1 / -1;
+    }
+    .story-card:last-child .story-image {
+        min-height: 250px;
+    }
+    .intro-grid {
+        gap: 6%;
+    }
+}
+@media (max-width: 700px) {
+    .header {
+        min-height: 78px;
+        padding: 14px 6%;
+    }
+    .logo-symbol {
+        font-size: 1.9rem;
+    }
+    .logo-text {
+        font-size: 0.7rem;
+    }
+    .menu-toggle {
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+        padding: 10px;
+    }
+    .menu-toggle span {
+        display: block;
+        width: 25px;
+        height: 1px;
+        background: white;
+    }
+    .navigation {
+        position: absolute;
+        top: 77px;
+        left: 0;
+        right: 0;
+        display: none;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0;
+        padding: 15px 6% 25px;
+        background: #151611;
+        border-bottom: 1px solid var(--line);
+    }
+    .navigation.open {
+        display: flex;
+    }
+    .navigation a {
+        padding: 15px 0;
+        font-size: 0.82rem;
+    }
+    .navigation .nav-button {
+        margin-top: 10px;
+        padding: 12px;
+        text-align: center;
+    }
+    .hero {
+        min-height: 740px;
+        height: 100svh;
+        padding: 130px 7% 115px;
+    }
+    .hero h1 {
+        font-size: clamp(3.1rem, 12vw, 5rem);
+    }
+    .hero-description {
+        font-size: 0.84rem;
+    }
+    .hero-actions {
+        flex-direction: column;
+        align-items: stretch;
+        max-width: 330px;
+    }
+    .button {
+        justify-content: space-between;
+    }
+    .hero-bottom {
+        left: 7%;
+        right: 7%;
+        bottom: 22px;
+        font-size: 0.5rem;
+    }
+    .scroll-indicator {
+        display: none;
+    }
+    .hero-index {
+        display: none;
+    }
+    .section-label {
+        margin-bottom: 50px;
+        font-size: 0.54rem;
+    }
+    .section-label span:last-child {
+        text-align: right;
+    }
+    .intro-grid,
+    .section-heading {
+        grid-template-columns: 1fr;
+        display: grid;
+        gap: 25px;
+    }
+    .intro h2,
+    .section-heading h2 {
+        font-size: clamp(2.5rem, 10vw, 3.8rem);
+    }
+    .quote-card {
+        margin-top: 65px;
+        padding: 35px 7%;
+    }
+    .story-grid {
+        grid-template-columns: 1fr;
+        gap: 22px;
+    }
+    .story-card:last-child {
+        grid-column: auto;
+    }
+    .story-image {
+        min-height: 260px;
+    }
+    .timeline-list {
+        margin-top: 55px;
+    }
+    .timeline-item {
+        grid-template-columns: 85px 12px 1fr;
+        gap: 12px;
+        min-height: 200px;
+    }
+    .timeline-year {
+        font-size: 1.15rem;
+    }
+    .timeline-item:not(:last-child) .timeline-marker::after {
+        height: 205px;
+    }
+    .timeline-content h3 {
+        font-size: 1.2rem;
+    }
+    .timeline-content p {
+        font-size: 0.79rem;
+    }
+    .exploration {
+        min-height: 620px;
+    }
+    .exploration h2 {
+        font-size: 3.6rem;
+    }
+    .transmission h2 {
+        font-size: 2.7rem;
+    }
+    .footer {
+        grid-template-columns: 1fr;
+        padding: 40px 7%;
+    }
+    .footer > p {
+        justify-self: start;
+    }
+    .footer-credit {
+        grid-column: auto;
+    }
+    .story-dialog {
+        padding: 45px 25px 30px;
+    }
+    .story-dialog h2 {
+        font-size: 1.9rem;
+    }
+}
+/* =====================================
+   13. ACCESSIBILITÉ
+===================================== */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        scroll-behavior: auto !important;
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
